@@ -22,10 +22,8 @@ module.exports = function(userDao) {
   const hashPassword = function(password) {
     return new Promise((resolve, reject) => {
       bcrypt.hash(password, 6)
-        .then((hash) => {
-          this.password = hash;
-          resolve(hash);
-        }).catch(reject(console.log('error hashing')));
+        .then(resolve)
+        .catch(reject);
     });
   };
 

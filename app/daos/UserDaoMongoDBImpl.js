@@ -7,7 +7,9 @@ module.exports = function() {
     const newUser = new User(userData);
     return new Promise((resolve, reject) => {
       newUser.save()
-        .then(resolve)
+        .then((user) => {
+          resolve(user.toObject());
+        })
         .catch(reject);
     });
   };
