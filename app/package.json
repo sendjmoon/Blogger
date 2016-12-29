@@ -6,6 +6,7 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
+    "bluebird": "https://registry.npmjs.org/bluebird/-/bluebird-2.10.2.tgz",
     "body-parser": "1.15.2",
     "cookie-parser": "1.4.3",
     "debug": "2.2.0",
