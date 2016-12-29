@@ -17,8 +17,14 @@ const BlogPostSchema = new Schema({
     required: true,
   },
   content: String,
-  createdAt: Number,
-  updatedAt: Number,
+  createdAt: {
+    type: Number,
+    required: true,
+  },
+  updatedAt: {
+    type: Number,
+    required: true,
+  },
 },
 {
   collection: 'blogPosts',

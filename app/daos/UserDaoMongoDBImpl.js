@@ -4,8 +4,10 @@ const User = require('../models/User');
 
 module.exports = function() {
   const create = function(userData) {
-    const user = new User(userData);
     return new Promise((resolve, reject) => {
+      const user = new User(userData);
+      user.createdAt = Date.now();
+      user.updatedAt = Date.now();
       user.save()
         .then((createdUser) => {
           User.findById(createdUser.id)
