@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt');
 
 module.exports = function(userDao) {
   const _userDao = userDao;
+
   const create = function(username, password, email) {
     return new Promise((resolve, reject) => {
       hashPassword(password)
@@ -19,6 +20,7 @@ module.exports = function(userDao) {
         .catch(reject);
     });
   };
+
   const hashPassword = function(password) {
     return new Promise((resolve, reject) => {
       bcrypt.hash(password, 6)

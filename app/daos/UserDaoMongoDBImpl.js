@@ -1,20 +1,26 @@
 'use strict';
 const Promise = require('bluebird');
-const User = require('../model/user.js');
+const User = require('../models/User');
 
 module.exports = function() {
-  const createUser = function(userData) {
-    const newUser = new User(userData);
+  const create = function(userData) {
+    const user = new User(userData);
     return new Promise((resolve, reject) => {
-      newUser.save()
-        .then((user) => {
-          resolve(user.toObject());
+      user.save()
+        .then((createdUser) => {
+          User.findById(createdUser.id)
+            .select('-__v')
+            .exec()
+            .then((newUser) => {
+              resolve(newUser.toObject());
+            })
+            .catch(reject);
         })
         .catch(reject);
     });
   };
 
   return {
-    create: createUser,
+    create: create,
   };
 };
