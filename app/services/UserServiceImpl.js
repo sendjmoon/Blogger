@@ -11,7 +11,7 @@ module.exports = function(userDao) {
           const userData = {
             username: username,
             password: hashedPassword,
-            email: email
+            email: email,
           };
           return _userDao.create(userData);
         })
@@ -28,6 +28,6 @@ module.exports = function(userDao) {
   };
 
   return {
-    create: create
+    create: create,
   };
 };

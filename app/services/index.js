@@ -8,5 +8,5 @@ const userServiceImpl = UserServiceImpl(UserDaoMongoDBImpl());
 
 module.exports = {
   blogPostService: blogPostServiceImpl,
-  userService: userServiceImpl
+  userService: userServiceImpl,
 };

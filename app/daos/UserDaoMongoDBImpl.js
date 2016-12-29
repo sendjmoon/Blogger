@@ -15,6 +15,6 @@ module.exports = function() {
   };
 
   return {
-    create: createUser
+    create: createUser,
   };
 };
