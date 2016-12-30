@@ -11,20 +11,27 @@ let plugins = [
 ];
 
 module.exports = {
+  plugins: plugins,
   entry: `${__dirname}/app/entry.js`,
   output: {
     path: '../app/public/javascripts/',
     filename: 'bundle.js'
   },
-  plugins: plugins,
   module: {
     loaders: [
       {
+        test: /\.html$/,
+        loader: 'html',
+        exclude: '/node_modules/'
+      },
+      {
         test: /\.js$/,
         loader: 'babel',
-        exclude: '/node_modules',
-        preset: ['es2015']
-      }
+        exclude: '/node_modules/',
+        query: {
+          presets: ['es2015'],
+        },
+      },
     ]
-  }
+  },
 };
