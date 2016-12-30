@@ -10,10 +10,13 @@ module.exports = function() {
 
       post.save()
         .then((createdPost) => {
-          createdPost
-            .populate('author')
-            .execPopulate()
-            .then(resolve)
+          BlogPost.findById(createdPost.id)
+            .select('-_id -__v')
+            .populate('author', '-_id username email')
+            .exec()
+            .then((newPost) => {
+              resolve(newPost.toObject());
+            })
             .catch(reject);
         })
         .catch(reject);
@@ -23,9 +26,12 @@ module.exports = function() {
   const getById = function(id) {
     return new Promise((resolve, reject) => {
       BlogPost.findById(id)
-        .populate('author')
+        .select('-_id -__v')
+        .populate('author', '-_id username email')
         .exec()
-        .then(resolve)
+        .then((post) => {
+          resolve(post ? post.toObject() : null);
+        })
         .catch(reject);
     })
   }
@@ -33,19 +39,29 @@ module.exports = function() {
   const getByPublicId = function(publicId) {
     return new Promise((resolve, reject) => {
       BlogPost.findOne({ publicId: publicId })
-        .populate('author')
+        .select('-_id -__v')
+        .populate('author', '-_id username email')
         .exec()
-        .then(resolve)
+        .then((post) => {
+          resolve(post ? post.toObject() : null);
+        })
         .catch(reject);
     });
   }
 
   const getByAuthorId = function(authorId) {
     return new Promise((resolve, reject) => {
-      BlogPost.find({ authorId: authorId })
-        .populate('author')
+      BlogPost.find({ author: authorId })
+        .select('-_id -__v')
+        .populate('author', '-_id username email')
         .exec()
-        .then(resolve)
+        .then((posts) => {
+          const postObjects = posts.map((post) => {
+            return post.toObject();
+          });
+
+          resolve(postObjects);
+        })
         .catch(reject);
     });
   }

@@ -2,15 +2,29 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const BlogPostSchema = new Schema({
-  publicId: String,
-  title: String,
+  publicId: {
+    type: String,
+    unique: true,
+    required: true,
+  },
+  title: {
+    type: String,
+    required: true,
+  },
   author: {
     type: Schema.Types.ObjectId,
-    ref: 'User'
+    ref: 'User',
+    required: true,
   },
   content: String,
-  createdAt: Number,
-  updatedAt: Number,
+  createdAt: {
+    type: Number,
+    required: true,
+  },
+  updatedAt: {
+    type: Number,
+    required: true,
+  },
 },
 {
   collection: 'blogPosts',
