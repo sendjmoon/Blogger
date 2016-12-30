@@ -9,13 +9,16 @@
     "bcrypt": "1.0.1",
     "bluebird": "3.4.7",
     "body-parser": "1.15.2",
+    "connect-redis": "3.2.0",
     "cookie-parser": "1.4.3",
     "debug": "2.2.0",
     "express": "4.14.0",
+    "express-session": "1.14.2",
     "hbs": "4.0.1",
     "mongoose": "4.7.5",
     "morgan": "1.7.0",
     "node-sass-middleware": "0.9.8",
+    "redis": "2.6.3",
     "serve-favicon": "2.3.0"
   }
 }

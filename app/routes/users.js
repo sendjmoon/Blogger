@@ -11,6 +11,9 @@ router.post('/', function(req, res, next) {
   userService.create(req.body.username, req.body.password, req.body.email)
     .then((user) => {
       delete user.password;
+
+      // Store the user in the session.
+      req.session.user = user;
       res.json(user);
     }).catch((err) => {
       res.status(500).json({
