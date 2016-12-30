@@ -18,7 +18,7 @@ router.get('/:publicId', function(req, res) {
 
 router.post('/', function(req, res) {
   const postData = {};
-  postData.authorId = 'test';
+  postData.authorId = req.session.user._id;
   postData.title = req.body.title;
   postData.content = req.body.content;
 

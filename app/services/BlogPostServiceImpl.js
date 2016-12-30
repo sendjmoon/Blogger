@@ -10,10 +10,10 @@ module.exports = function(blogPostDao) {
 
   const create = function(authorId, title, content) {
     const post = {};
-    post.authorId = authorId;
+    post.author = authorId;
     post.title = title;
     post.content = content;
-    post.publicId = `${utils.generateHash(4)}-${title.toLowerCase().split(' ').concat('-')}`;
+    post.publicId = `${utils.generateHash(4)}-${title.toLowerCase().split(' ').join('-')}`;
 
     return _blogPostDao.create(post);
   }

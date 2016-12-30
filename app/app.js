@@ -4,7 +4,12 @@ const favicon = require('serve-favicon');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
+
 const mongoose = require('mongoose');
+const redis = require('redis');
+const redisClient = redis.createClient();
+const session = require('express-session');
+const RedisStore = require('connect-redis')(session);
 
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/blogger');
 
@@ -20,6 +25,26 @@ app.set('view engine', 'hbs');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+const sessionOptions = {
+
+  // If secret is used then it should really be retrieved from a source
+  // (e.g. db, environment variable) instead of being hard coded.
+  secret: 'some super secret',
+  store: new RedisStore({
+    client: redisClient,
+  }),
+  name: 'blogger',
+  saveUninitialized: true,
+  resave: true,
+  cookie: {
+    maxAge: 86400 * 365
+  },
+};
+if (app.get('env') === 'production') {
+  sessionOptions.cookie.secure = true;
+}
+
+app.use(session(sessionOptions));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
