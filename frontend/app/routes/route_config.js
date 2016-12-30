@@ -9,7 +9,7 @@ module.exports = function($routeProvider) {
     .when('/signup', {
       template: require('../html/signup.html'),
       controller: 'AuthController',
-      controllerAs: 'ac'
+      controllerAs: 'ac',
     })
     .otherwise({
       redirectTo: '/signup',

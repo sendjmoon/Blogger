@@ -13,7 +13,7 @@ bloggerApp.run(['$rootScope', ($rs) => {
     Headers: {
       'Content-Type': 'application/json',
       'Accept-Content': 'application/json'
-    }
+    },
   };
 }]);
 

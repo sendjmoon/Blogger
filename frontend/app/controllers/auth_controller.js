@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = function(app) {
-  app.controller('AuthController', ['$log', '$http', '$location', function($log, $http, $location) {
+  app.controller('AuthController', ['$http', '$location', function($http, $location) {
 
     this.user = {};
 
