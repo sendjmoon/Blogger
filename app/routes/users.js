@@ -24,7 +24,7 @@ router.post('/', function(req, res) {
 });
 
 router.post('/signin', function(req, res) {
-  userService.login(req.body)
+  userService.signin(req.body)
     .then((user) => {
       delete user.password;
       req.session.user = user;

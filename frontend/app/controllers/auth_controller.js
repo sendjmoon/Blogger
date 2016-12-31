@@ -25,11 +25,11 @@ module.exports = function(app) {
             this.user.password = userData.password;
             $location.path('/home');
           } else {
-            alert('error logging in');
+            alert('error signing in');
           }
         })
         .catch((err) => {
-          alert('error logging in');
+          alert('error signing in');
         });
     };
   }]);
