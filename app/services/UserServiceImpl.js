@@ -34,7 +34,9 @@ module.exports = function(userDao) {
       _userDao.signin(userData)
         .then((user) => {
           comparePassword(userData.password, user.password)
-          .then(resolve)
+          .then((res) => {
+            res === true ? resolve(user) : reject(res);
+          })
           .catch(reject);
         })
         .catch(reject);
@@ -51,8 +53,18 @@ module.exports = function(userDao) {
     });
   };
 
+  const signout = function() {
+    return new Promise((resolve, reject) => {
+      resolve(console.log('user signed out'));
+      reject({
+        error: 'error signing out'
+      });
+    });
+  };
+
   return {
     create: create,
     signin: signin,
+    signout: signout,
   };
 };

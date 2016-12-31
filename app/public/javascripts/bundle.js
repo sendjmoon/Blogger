@@ -62,7 +62,7 @@
 	  };
 	}]);
 
-	bloggerApp.config(__webpack_require__(15));
+	bloggerApp.config(__webpack_require__(17));
 
 /***/ },
 /* 1 */
@@ -34309,14 +34309,8 @@
 	module.exports = function (app) {
 	  app.controller('AuthController', ['$http', '$location', function ($http, $location) {
 
-	    this.user = {};
-
 	    this.signup = function (userData) {
-	      var _this = this;
-
 	      $http.post(this.baseUrl + '/users', userData).then(function (res) {
-	        _this.user.username = userData.username;
-	        _this.user.email = userData.email;
 	        $location.path('/home');
 	      }).catch(function (err) {
 	        alert('error creating user');
@@ -34324,18 +34318,18 @@
 	    };
 
 	    this.signin = function (userData) {
-	      var _this2 = this;
-
 	      $http.post(this.baseUrl + '/users/signin', userData).then(function (res) {
-	        if (res.data === true) {
-	          _this2.user.username = userData.username;
-	          _this2.user.password = userData.password;
-	          $location.path('/home');
-	        } else {
-	          alert('error logging in');
-	        }
+	        $location.path('/home');
 	      }).catch(function (err) {
-	        alert('error logging in');
+	        alert('error signing in');
+	      });
+	    };
+
+	    this.signout = function () {
+	      $http.get(this.baseUrl + '/users/signout').then(function (res) {
+	        $location.path('/signin');
+	      }).catch(function (err) {
+	        alert('error signing out');
 	      });
 	    };
 	  }]);
@@ -34348,9 +34342,7 @@
 	'use strict';
 
 	module.exports = function (app) {
-	  app.controller('HomeController', [function () {
-	    console.log('home controller');
-	  }]);
+	  app.controller('HomeController', [function () {}]);
 	};
 
 /***/ },
@@ -34363,6 +34355,7 @@
 	  __webpack_require__(9)(app);
 	  __webpack_require__(11)(app);
 	  __webpack_require__(13)(app);
+	  __webpack_require__(15)(app);
 	};
 
 /***/ },
@@ -34385,7 +34378,7 @@
 /* 10 */
 /***/ function(module, exports) {
 
-	module.exports = "<form name=\"signin\" data-ng-submit=\"$ctrl.signin($ctrl.user)\">\n  <input type=\"text\" required placeholder=\"username\" data-ng-model=\"$ctrl.user.username\">\n  <input type=\"password\" required placeholder=\"password\" data-ng-model=\"$ctrl.user.password\">\n  <button type=\"submit\">Login</button>\n</form>\n";
+	module.exports = "<h1>Sign In</h1>\n<form name=\"signin\" data-ng-submit=\"$ctrl.signin($ctrl.user)\">\n  <input type=\"text\" required placeholder=\"username\" data-ng-model=\"$ctrl.user.username\">\n  <input type=\"password\" required placeholder=\"password\" data-ng-model=\"$ctrl.user.password\">\n  <button type=\"submit\">Sign In</button>\n</form>\n\n<p>Not registered? <a href=\"#!/signup\">Sign up here.</a></p>\n";
 
 /***/ },
 /* 11 */
@@ -34407,7 +34400,7 @@
 /* 12 */
 /***/ function(module, exports) {
 
-	module.exports = "<h1>SIGN UP</h1>\n<form name=\"signup\" data-ng-submit=\"$ctrl.signup($ctrl.user)\">\n  <input type=\"text\" required placeholder=\"username\" data-ng-model=\"$ctrl.user.username\">\n  <input type=\"text\" required placeholder=\"email\" data-ng-model=\"$ctrl.user.email\">\n  <input type=\"password\" required placeholder=\"password\" data-ng-model=\"$ctrl.user.password\">\n  <button type=\"submit\">Sign Up</button>\n</form>\n";
+	module.exports = "<h1>SIGN UP</h1>\n<form name=\"signup\" data-ng-submit=\"$ctrl.signup($ctrl.user)\">\n  <input type=\"text\" required placeholder=\"username\" data-ng-model=\"$ctrl.user.username\">\n  <input type=\"text\" required placeholder=\"email\" data-ng-model=\"$ctrl.user.email\">\n  <input type=\"password\" required placeholder=\"password\" data-ng-model=\"$ctrl.user.password\">\n  <button type=\"submit\">Sign Up</button>\n</form>\n<p>Already registered? <a href=\"#!/signin\">Sign in here.</a></p>\n";
 
 /***/ },
 /* 13 */
@@ -34416,8 +34409,8 @@
 	'use strict';
 
 	module.exports = function (app) {
-	  app.component('home', {
-	    controller: 'HomeController',
+	  app.component('signOut', {
+	    controller: 'AuthController',
 	    template: __webpack_require__(14),
 	    bindings: {
 	      baseUrl: '<'
@@ -34429,7 +34422,7 @@
 /* 14 */
 /***/ function(module, exports) {
 
-	module.exports = "<h1> homepage </h1>\n";
+	module.exports = "<button type=\"submit\" data-ng-click=\"$ctrl.signout()\">Sign Out</button>\n";
 
 /***/ },
 /* 15 */
@@ -34437,19 +34430,13 @@
 
 	'use strict';
 
-	module.exports = function ($routeProvider) {
-	  $routeProvider.when('/home', {
+	module.exports = function (app) {
+	  app.component('home', {
+	    controller: 'HomeController',
 	    template: __webpack_require__(16),
-	    controller: 'HomeController'
-	  }).when('/signup', {
-	    template: __webpack_require__(17),
-	    controller: 'AuthController',
-	    controllerAs: 'ac'
-	  }).when('/signin', {
-	    template: __webpack_require__(18),
-	    controller: 'AuthController'
-	  }).otherwise({
-	    redirectTo: '/'
+	    bindings: {
+	      baseUrl: '<'
+	    }
 	  });
 	};
 
@@ -34457,16 +34444,44 @@
 /* 16 */
 /***/ function(module, exports) {
 
-	module.exports = "<home data-base-url=\"baseUrl\"></home>\n";
+	module.exports = "<h1> homepage </h1>\n";
 
 /***/ },
 /* 17 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	module.exports = function ($routeProvider) {
+	  $routeProvider.when('/home', {
+	    template: __webpack_require__(18),
+	    controller: 'HomeController'
+	  }).when('/signup', {
+	    template: __webpack_require__(19),
+	    controller: 'AuthController',
+	    controllerAs: 'ac'
+	  }).when('/signin', {
+	    template: __webpack_require__(20),
+	    controller: 'AuthController'
+	  }).otherwise({
+	    redirectTo: '/'
+	  });
+	};
+
+/***/ },
+/* 18 */
+/***/ function(module, exports) {
+
+	module.exports = "<home data-base-url=\"baseUrl\"></home>\n<sign-out data-base-url=\"baseUrl\"></sign-out>\n";
+
+/***/ },
+/* 19 */
 /***/ function(module, exports) {
 
 	module.exports = "<sign-up data-base-url=\"baseUrl\"></sign-up>\n";
 
 /***/ },
-/* 18 */
+/* 20 */
 /***/ function(module, exports) {
 
 	module.exports = "<sign-in data-base-url=\"baseUrl\"><sign-in>\n";
