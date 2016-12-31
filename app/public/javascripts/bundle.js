@@ -34378,7 +34378,7 @@
 /* 10 */
 /***/ function(module, exports) {
 
-	module.exports = "<h1>Sign In</h1>\n<form name=\"signin\" data-ng-submit=\"$ctrl.signin($ctrl.user)\">\n  <input type=\"text\" required placeholder=\"username\" data-ng-model=\"$ctrl.user.username\">\n  <input type=\"password\" required placeholder=\"password\" data-ng-model=\"$ctrl.user.password\">\n  <button type=\"submit\">Sign In</button>\n</form>\n\n<p>Not registered? <a href=\"#!/signup\">Sign up here.</a></p>\n";
+	module.exports = "<h1>Sign In</h1>\n\n<form name=\"signin\" data-ng-submit=\"$ctrl.signin($ctrl.user)\">\n  <input type=\"text\" required placeholder=\"username\" data-ng-model=\"$ctrl.user.username\">\n  <input type=\"password\" required placeholder=\"password\" data-ng-model=\"$ctrl.user.password\">\n  <button type=\"submit\">Sign In</button>\n</form>\n\n<p>Not registered? <a href=\"#!/signup\">Sign up here.</a></p>\n";
 
 /***/ },
 /* 11 */
@@ -34400,7 +34400,7 @@
 /* 12 */
 /***/ function(module, exports) {
 
-	module.exports = "<h1>SIGN UP</h1>\n<form name=\"signup\" data-ng-submit=\"$ctrl.signup($ctrl.user)\">\n  <input type=\"text\" required placeholder=\"username\" data-ng-model=\"$ctrl.user.username\">\n  <input type=\"text\" required placeholder=\"email\" data-ng-model=\"$ctrl.user.email\">\n  <input type=\"password\" required placeholder=\"password\" data-ng-model=\"$ctrl.user.password\">\n  <button type=\"submit\">Sign Up</button>\n</form>\n<p>Already registered? <a href=\"#!/signin\">Sign in here.</a></p>\n";
+	module.exports = "<h1>SIGN UP</h1>\n\n<form name=\"signup\" data-ng-submit=\"$ctrl.signup($ctrl.user)\">\n  <input type=\"text\" required placeholder=\"username\" data-ng-model=\"$ctrl.user.username\">\n  <input type=\"text\" required placeholder=\"email\" data-ng-model=\"$ctrl.user.email\">\n  <input type=\"password\" required placeholder=\"password\" data-ng-model=\"$ctrl.user.password\">\n  <button type=\"submit\">Sign Up</button>\n</form>\n\n<p>Already registered? <a href=\"#!/signin\">Sign in here.</a></p>\n";
 
 /***/ },
 /* 13 */
