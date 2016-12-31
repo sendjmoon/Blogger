@@ -22,7 +22,7 @@ module.exports = function() {
     });
   };
 
-  const login = function(userData) {
+  const signin = function(userData) {
     return new Promise((resolve, reject) => {
       User.findOne({username: userData.username})
         .select('-__v')
@@ -36,6 +36,6 @@ module.exports = function() {
 
   return {
     create: create,
-    login: login,
+    signin: signin,
   };
 };

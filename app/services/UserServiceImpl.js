@@ -29,9 +29,9 @@ module.exports = function(userDao) {
     });
   };
 
-  const login = function(userData) {
+  const signin = function(userData) {
     return new Promise((resolve, reject) => {
-      _userDao.login(userData)
+      _userDao.signin(userData)
         .then((user) => {
           comparePassword(userData.password, user.password)
           .then(resolve)
@@ -53,6 +53,6 @@ module.exports = function(userDao) {
 
   return {
     create: create,
-    login: login,
+    signin: signin,
   };
 };

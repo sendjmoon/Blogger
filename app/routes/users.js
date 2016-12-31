@@ -32,7 +32,7 @@ router.post('/signin', function(req, res) {
     })
     .catch((err) => {
       res.status(500).json({
-        error: 'bad login attempt'
+        error: 'bad signin attempt'
       });
     });
 });
