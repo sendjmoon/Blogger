@@ -29,7 +29,30 @@ module.exports = function(userDao) {
     });
   };
 
+  const login = function(userData) {
+    return new Promise((resolve, reject) => {
+      _userDao.login(userData)
+        .then((user) => {
+          comparePassword(userData.password, user.password)
+          .then(resolve)
+          .catch(reject);
+        })
+        .catch(reject);
+    });
+  };
+
+  const comparePassword = function(password, hash) {
+    return new Promise((resolve, reject) => {
+      bcrypt.compare(password, hash)
+        .then((res) => {
+          resolve(res);
+        })
+        .catch(reject);
+    });
+  };
+
   return {
     create: create,
+    login: login,
   };
 };

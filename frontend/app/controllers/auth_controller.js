@@ -16,5 +16,21 @@ module.exports = function(app) {
           alert('error creating user');
         });
     };
+
+    this.signin = function(userData) {
+      $http.post(this.baseUrl + '/users/signin', userData)
+        .then((res) => {
+          if (res.data === true) {
+            this.user.username = userData.username;
+            this.user.password = userData.password;
+            $location.path('/home');
+          } else {
+            alert('error logging in');
+          }
+        })
+        .catch((err) => {
+          alert('error logging in');
+        });
+    };
   }]);
 };

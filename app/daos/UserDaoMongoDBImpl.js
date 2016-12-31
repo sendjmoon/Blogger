@@ -22,7 +22,20 @@ module.exports = function() {
     });
   };
 
+  const login = function(userData) {
+    return new Promise((resolve, reject) => {
+      User.findOne({username: userData.username})
+        .select('-__v')
+        .exec()
+        .then((user) => {
+          resolve(user.toObject());
+        })
+        .catch(reject);
+    });
+  };
+
   return {
     create: create,
+    login: login,
   };
 };

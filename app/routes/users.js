@@ -4,10 +4,10 @@ const userService = require('../services').userService;
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
+  return req.sessionID ? res.redirect('/#!/signin') : res.redirect('/#!/signup');
 });
 
-router.post('/', function(req, res, next) {
+router.post('/', function(req, res) {
   userService.create(req.body.username, req.body.password, req.body.email)
     .then((user) => {
       delete user.password;
@@ -15,9 +15,24 @@ router.post('/', function(req, res, next) {
       // Store the user in the session.
       req.session.user = user;
       res.json(user);
-    }).catch((err) => {
+    })
+    .catch((err) => {
       res.status(500).json({
         error: 'error creating user'
+      });
+    });
+});
+
+router.post('/signin', function(req, res) {
+  userService.login(req.body)
+    .then((user) => {
+      delete user.password;
+      req.session.user = user;
+      res.json(user);
+    })
+    .catch((err) => {
+      res.status(500).json({
+        error: 'bad login attempt'
       });
     });
 });
