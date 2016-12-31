@@ -3,13 +3,9 @@
 module.exports = function(app) {
   app.controller('AuthController', ['$http', '$location', function($http, $location) {
 
-    this.user = {};
-
     this.signup = function(userData) {
       $http.post(this.baseUrl + '/users', userData)
         .then((res) => {
-          this.user.username = userData.username;
-          this.user.email = userData.email;
           $location.path('/home');
         })
         .catch((err) => {
@@ -20,16 +16,20 @@ module.exports = function(app) {
     this.signin = function(userData) {
       $http.post(this.baseUrl + '/users/signin', userData)
         .then((res) => {
-          if (res.data === true) {
-            this.user.username = userData.username;
-            this.user.password = userData.password;
-            $location.path('/home');
-          } else {
-            alert('error signing in');
-          }
+          $location.path('/home');
         })
         .catch((err) => {
           alert('error signing in');
+        });
+    };
+
+    this.signout = function() {
+      $http.get(this.baseUrl + '/users/signout')
+        .then((res) => {
+          $location.path('/signin');
+        })
+        .catch((err) => {
+          alert('error signing out');
         });
     };
   }]);
