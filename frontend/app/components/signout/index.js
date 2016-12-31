@@ -5,7 +5,7 @@ module.exports = function(app) {
     controller: 'AuthController',
     template: require('./signout-template.html'),
     bindings: {
-      baseUrl: '<'
+      baseUrl: '<',
     }
   });
 };
