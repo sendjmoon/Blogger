@@ -26,14 +26,14 @@ router.post('/', function(req, res) {
 });
 
 router.post('/signin', function(req, res) {
-  userService.authenticateUser(req.body.username, req.body.password)
+  userService.authenticateUser(req.body.emailOrUsername, req.body.password)
     .then((user) => {
       delete user.password;
       req.session.user = user;
       res.json(user);
     })
     .catch((err) => {
-      res.status(500).json({
+      res.status(400).json({
         error: 'bad signin attempt'
       });
     });

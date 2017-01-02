@@ -34313,7 +34313,7 @@
 	      var _this = this;
 
 	      $http.post(this.baseUrl + '/users', userData).then(function (res) {
-	        _this.user.username = userData.username;
+	        _this.user.username = userData.emailOrUsername;
 	        _this.user.email = userData.email;
 	        $location.path('/home');
 	      }).catch(function (err) {
@@ -34379,7 +34379,7 @@
 /* 10 */
 /***/ function(module, exports) {
 
-	module.exports = "<form name=\"signin\" data-ng-submit=\"$ctrl.signin($ctrl.user)\">\n  <input type=\"text\" required placeholder=\"username\" data-ng-model=\"$ctrl.user.username\">\n  <input type=\"password\" required placeholder=\"password\" data-ng-model=\"$ctrl.user.password\">\n  <button type=\"submit\">Login</button>\n</form>\n";
+	module.exports = "<form name=\"signin\" data-ng-submit=\"$ctrl.signin($ctrl.user)\">\n  <input type=\"text\" required placeholder=\"username\" data-ng-model=\"$ctrl.user.emailOrUsername\">\n  <input type=\"password\" required placeholder=\"password\" data-ng-model=\"$ctrl.user.password\">\n  <button type=\"submit\">Login</button>\n</form>\n";
 
 /***/ },
 /* 11 */
