@@ -3,8 +3,6 @@
 module.exports = function(app) {
   app.controller('AuthController', ['$http', '$location', function($http, $location) {
 
-    this.user = {};
-
     this.signup = function(userData) {
       $http.post(this.baseUrl + '/users', userData)
         .then((res) => {
@@ -21,8 +19,6 @@ module.exports = function(app) {
       $http.post(this.baseUrl + '/users/signin', userData)
         .then((res) => {
           if (res.data === true) {
-            this.user.username = userData.username;
-            this.user.password = userData.password;
             $location.path('/home');
           } else {
             alert('error signing in');
