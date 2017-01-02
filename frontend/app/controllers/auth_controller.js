@@ -6,7 +6,7 @@ module.exports = function(app) {
     this.signup = function(userData) {
       $http.post(this.baseUrl + '/users', userData)
         .then((res) => {
-          this.user.username = userData.username;
+          this.user.username = userData.emailOrUsername;
           this.user.email = userData.email;
           $location.path('/home');
         })
