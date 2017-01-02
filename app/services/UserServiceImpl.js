@@ -29,9 +29,9 @@ module.exports = function(userDao) {
     });
   };
 
-  const findByUsername = function(username, password) {
+  const authenticateUser = function(username, password) {
     return new Promise((resolve, reject) => {
-      _userDao.findByUsername(username)
+      _userDao.getByUsername(username)
         .then((user) => {
           return isMatchingPassword(password, user.password)
           .then(resolve)
@@ -51,6 +51,6 @@ module.exports = function(userDao) {
 
   return {
     create: create,
-    findByUsername: findByUsername,
+    authenticateUser: authenticateUser,
   };
 };

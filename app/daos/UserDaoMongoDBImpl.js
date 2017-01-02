@@ -22,7 +22,7 @@ module.exports = function() {
     });
   };
 
-  const findByUsername = function(username) {
+  const getByUsername = function(username) {
     return new Promise((resolve, reject) => {
       User.findOne({username: username})
         .select('-__v')
@@ -36,6 +36,6 @@ module.exports = function() {
 
   return {
     create: create,
-    findByUsername: findByUsername,
+    getByUsername: getByUsername,
   };
 };

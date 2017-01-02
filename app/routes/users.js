@@ -24,7 +24,7 @@ router.post('/', function(req, res) {
 });
 
 router.post('/signin', function(req, res) {
-  userService.findByUsername(req.body.username, req.body.password)
+  userService.authenticateUser(req.body.username, req.body.password)
     .then((user) => {
       delete user.password;
       req.session.user = user;
