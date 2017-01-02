@@ -22,9 +22,9 @@ module.exports = function() {
     });
   };
 
-  const signin = function(userData) {
+  const findByUsername = function(username) {
     return new Promise((resolve, reject) => {
-      User.findOne({username: userData.username})
+      User.findOne({username: username})
         .select('-__v')
         .exec()
         .then((user) => {
@@ -36,6 +36,6 @@ module.exports = function() {
 
   return {
     create: create,
-    signin: signin,
+    findByUsername: findByUsername,
   };
 };

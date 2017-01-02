@@ -29,11 +29,11 @@ module.exports = function(userDao) {
     });
   };
 
-  const signin = function(userData) {
+  const findByUsername = function(username, password) {
     return new Promise((resolve, reject) => {
-      _userDao.signin(userData)
+      _userDao.findByUsername(username)
         .then((user) => {
-          comparePassword(userData.password, user.password)
+          return isMatchingPassword(password, user.password)
           .then(resolve)
           .catch(reject);
         })
@@ -41,18 +41,16 @@ module.exports = function(userDao) {
     });
   };
 
-  const comparePassword = function(password, hash) {
+  const isMatchingPassword = function(password, hash) {
     return new Promise((resolve, reject) => {
       bcrypt.compare(password, hash)
-        .then((res) => {
-          resolve(res);
-        })
+        .then(resolve)
         .catch(reject);
     });
   };
 
   return {
     create: create,
-    signin: signin,
+    findByUsername: findByUsername,
   };
 };

@@ -34309,8 +34309,6 @@
 	module.exports = function (app) {
 	  app.controller('AuthController', ['$http', '$location', function ($http, $location) {
 
-	    this.user = {};
-
 	    this.signup = function (userData) {
 	      var _this = this;
 
@@ -34324,18 +34322,14 @@
 	    };
 
 	    this.signin = function (userData) {
-	      var _this2 = this;
-
 	      $http.post(this.baseUrl + '/users/signin', userData).then(function (res) {
 	        if (res.data === true) {
-	          _this2.user.username = userData.username;
-	          _this2.user.password = userData.password;
 	          $location.path('/home');
 	        } else {
-	          alert('error logging in');
+	          alert('error signing in');
 	        }
 	      }).catch(function (err) {
-	        alert('error logging in');
+	        alert('error signing in');
 	      });
 	    };
 	  }]);
@@ -34429,7 +34423,7 @@
 /* 14 */
 /***/ function(module, exports) {
 
-	module.exports = "<h1> homepage </h1>\n";
+	module.exports = "<h1>homepage</h1>\n";
 
 /***/ },
 /* 15 */
