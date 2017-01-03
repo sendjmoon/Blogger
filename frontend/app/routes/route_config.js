@@ -11,7 +11,11 @@ module.exports = function($routeProvider) {
       controller: 'AuthController',
       controllerAs: 'ac',
     })
+    .when('/signin', {
+      template: require('../html/signin.html'),
+      controller: 'AuthController',
+    })
     .otherwise({
-      redirectTo: '/signup',
+      redirectTo: '/',
     });
 };

@@ -2,6 +2,6 @@
 
 module.exports = function(app) {
   app.controller('HomeController', [function() {
-    console.log('home controller');
+    // planning to introduce code here. may change controller name to BlogController
   }]);
 };
