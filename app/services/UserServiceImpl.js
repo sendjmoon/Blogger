@@ -51,18 +51,8 @@ module.exports = function(userDao) {
     });
   };
 
-  const signout = function() {
-    return new Promise((resolve, reject) => {
-      resolve(console.log('user signed out'));
-      reject({
-        error: 'error signing out'
-      });
-    });
-  };
-
   return {
     create: create,
     authenticateUser: authenticateUser,
-    signout: signout,
   };
 };

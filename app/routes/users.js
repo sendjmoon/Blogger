@@ -38,16 +38,8 @@ router.post('/signin', function(req, res) {
 });
 
 router.get('/signout', function(req, res) {
-  userService.signout()
-    .then((data) => {
-      req.session.user = null;
-      res.json(data);
-    })
-    .catch((err) => {
-      res.status(500).json({
-        error: 'error signing out'
-      });
-    });
+  req.session.user = null;
+  res.json('signed out');
 });
 
 module.exports = router;
