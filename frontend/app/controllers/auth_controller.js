@@ -6,8 +6,6 @@ module.exports = function(app) {
     this.signup = function(userData) {
       $http.post(this.baseUrl + '/users', userData)
         .then((res) => {
-          this.user.username = userData.emailOrUsername;
-          this.user.email = userData.email;
           $location.path('/home');
         })
         .catch((err) => {
@@ -15,14 +13,10 @@ module.exports = function(app) {
         });
     };
 
-    this.signin = function(userData) {
+    this.authenticateUser = function(userData) {
       $http.post(this.baseUrl + '/users/signin', userData)
         .then((res) => {
-          if (res.data === true) {
-            $location.path('/home');
-          } else {
-            alert('error signing in');
-          }
+          res.data === true ? $location.path('/home') : alert('error signing in');
         })
         .catch((err) => {
           alert('error signing in');

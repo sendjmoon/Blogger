@@ -10,7 +10,7 @@ router.get('/', checkSessionExists, function(req, res, next) {
 });
 
 router.post('/', function(req, res) {
-  userService.create(req.body.username, req.body.password, req.body.email)
+  userService.create(req.body.username, req.body.email, req.body.password)
     .then((user) => {
       delete user.password;
 
@@ -27,10 +27,8 @@ router.post('/', function(req, res) {
 
 router.post('/signin', function(req, res) {
   userService.authenticateUser(req.body.emailOrUsername, req.body.password)
-    .then((user) => {
-      delete user.password;
-      req.session.user = user;
-      res.json(user);
+    .then((isMatching) => {
+      res.json(isMatching);
     })
     .catch((err) => {
       res.status(400).json({

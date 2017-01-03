@@ -34310,24 +34310,16 @@
 	  app.controller('AuthController', ['$http', '$location', function ($http, $location) {
 
 	    this.signup = function (userData) {
-	      var _this = this;
-
 	      $http.post(this.baseUrl + '/users', userData).then(function (res) {
-	        _this.user.username = userData.emailOrUsername;
-	        _this.user.email = userData.email;
 	        $location.path('/home');
 	      }).catch(function (err) {
 	        alert('error creating user');
 	      });
 	    };
 
-	    this.signin = function (userData) {
+	    this.authenticateUser = function (userData) {
 	      $http.post(this.baseUrl + '/users/signin', userData).then(function (res) {
-	        if (res.data === true) {
-	          $location.path('/home');
-	        } else {
-	          alert('error signing in');
-	        }
+	        res.data === true ? $location.path('/home') : alert('error signing in');
 	      }).catch(function (err) {
 	        alert('error signing in');
 	      });
@@ -34379,7 +34371,7 @@
 /* 10 */
 /***/ function(module, exports) {
 
-	module.exports = "<form name=\"signin\" data-ng-submit=\"$ctrl.signin($ctrl.user)\">\n  <input type=\"text\" required placeholder=\"username\" data-ng-model=\"$ctrl.user.emailOrUsername\">\n  <input type=\"password\" required placeholder=\"password\" data-ng-model=\"$ctrl.user.password\">\n  <button type=\"submit\">Login</button>\n</form>\n";
+	module.exports = "<form name=\"signin\" data-ng-submit=\"$ctrl.authenticateUser($ctrl.user)\">\n  <input type=\"text\" required placeholder=\"username\" data-ng-model=\"$ctrl.user.emailOrUsername\">\n  <input type=\"password\" required placeholder=\"password\" data-ng-model=\"$ctrl.user.password\">\n  <button type=\"submit\">Login</button>\n</form>\n";
 
 /***/ },
 /* 11 */

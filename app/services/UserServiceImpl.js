@@ -35,7 +35,7 @@ module.exports = function(userDao) {
         .then((user) => {
           return isMatchingPassword(password, user.password)
             .then((isMatching) => {
-              isMatching ? resolve(user) : reject();
+              isMatching ? resolve(isMatching) : reject();
             })
             .catch(reject);
         })
