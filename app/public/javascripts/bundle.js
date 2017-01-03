@@ -34311,21 +34311,15 @@
 
 	    this.signup = function (userData) {
 	      $http.post(this.baseUrl + '/users', userData).then(function (res) {
-<<<<<<< HEAD
-=======
-	        _this.user.username = userData.emailOrUsername;
-	        _this.user.email = userData.email;
->>>>>>> 443d4fbfbcf2dd0ff32bda0031d7aa24ef44dc97
 	        $location.path('/home');
 	      }).catch(function (err) {
 	        alert('error creating user');
 	      });
 	    };
 
-	    this.signin = function (userData) {
+	    this.authenticateUser = function (userData) {
 	      $http.post(this.baseUrl + '/users/signin', userData).then(function (res) {
-<<<<<<< HEAD
-	        $location.path('/home');
+	        res.data === true ? $location.path('/home') : alert('error signing in');
 	      }).catch(function (err) {
 	        alert('error signing in');
 	      });
@@ -34336,15 +34330,6 @@
 	        $location.path('/signin');
 	      }).catch(function (err) {
 	        alert('error signing out');
-=======
-	        if (res.data === true) {
-	          $location.path('/home');
-	        } else {
-	          alert('error signing in');
-	        }
-	      }).catch(function (err) {
-	        alert('error signing in');
->>>>>>> 443d4fbfbcf2dd0ff32bda0031d7aa24ef44dc97
 	      });
 	    };
 	  }]);
@@ -34393,11 +34378,7 @@
 /* 10 */
 /***/ function(module, exports) {
 
-<<<<<<< HEAD
-	module.exports = "<h1>Sign In</h1>\n\n<form name=\"signin\" data-ng-submit=\"$ctrl.signin($ctrl.user)\">\n  <input type=\"text\" required placeholder=\"username\" data-ng-model=\"$ctrl.user.username\">\n  <input type=\"password\" required placeholder=\"password\" data-ng-model=\"$ctrl.user.password\">\n  <button type=\"submit\">Sign In</button>\n</form>\n\n<p>Not registered? <a href=\"#!/signup\">Sign up here.</a></p>\n";
-=======
-	module.exports = "<form name=\"signin\" data-ng-submit=\"$ctrl.signin($ctrl.user)\">\n  <input type=\"text\" required placeholder=\"username\" data-ng-model=\"$ctrl.user.emailOrUsername\">\n  <input type=\"password\" required placeholder=\"password\" data-ng-model=\"$ctrl.user.password\">\n  <button type=\"submit\">Login</button>\n</form>\n";
->>>>>>> 443d4fbfbcf2dd0ff32bda0031d7aa24ef44dc97
+	module.exports = "<h1>Sign In</h1>\n\n<form name=\"signin\" data-ng-submit=\"$ctrl.authenticateUser($ctrl.user)\">\n  <input type=\"text\" required placeholder=\"username\" data-ng-model=\"$ctrl.user.emailOrUsername\">\n  <input type=\"password\" required placeholder=\"password\" data-ng-model=\"$ctrl.user.password\">\n  <button type=\"submit\">Sign In</button>\n</form>\n\n<p>Not registered? <a href=\"#!/signup\">Sign up here.</a></p>\n";
 
 /***/ },
 /* 11 */
@@ -34441,11 +34422,7 @@
 /* 14 */
 /***/ function(module, exports) {
 
-<<<<<<< HEAD
 	module.exports = "<button type=\"submit\" data-ng-click=\"$ctrl.signout()\">Sign Out</button>\n";
-=======
-	module.exports = "<h1>homepage</h1>\n";
->>>>>>> 443d4fbfbcf2dd0ff32bda0031d7aa24ef44dc97
 
 /***/ },
 /* 15 */
@@ -34467,7 +34444,7 @@
 /* 16 */
 /***/ function(module, exports) {
 
-	module.exports = "<h1> homepage </h1>\n";
+	module.exports = "<h1>homepage</h1>\n";
 
 /***/ },
 /* 17 */
