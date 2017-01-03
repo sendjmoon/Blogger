@@ -5,7 +5,7 @@ const bcrypt = require('bcrypt');
 module.exports = function(userDao) {
   const _userDao = userDao;
 
-  const create = function(username, password, email) {
+  const create = function(username, email, password) {
     return new Promise((resolve, reject) => {
       hashPassword(password)
         .then((hashedPassword) => {
@@ -29,26 +29,24 @@ module.exports = function(userDao) {
     });
   };
 
-  const signin = function(userData) {
+  const authenticateUser = function(emailOrUsername, password) {
     return new Promise((resolve, reject) => {
-      _userDao.signin(userData)
+      _userDao.getByEmailOrUsername(emailOrUsername)
         .then((user) => {
-          comparePassword(userData.password, user.password)
-          .then((res) => {
-            res === true ? resolve(user) : reject(res);
-          })
-          .catch(reject);
+          return isMatchingPassword(password, user.password)
+            .then((isMatching) => {
+              isMatching ? resolve(user) : reject();
+            })
+            .catch(reject);
         })
         .catch(reject);
     });
   };
 
-  const comparePassword = function(password, hash) {
+  const isMatchingPassword = function(password, hash) {
     return new Promise((resolve, reject) => {
       bcrypt.compare(password, hash)
-        .then((res) => {
-          resolve(res);
-        })
+        .then(resolve)
         .catch(reject);
     });
   };
@@ -64,7 +62,7 @@ module.exports = function(userDao) {
 
   return {
     create: create,
-    signin: signin,
+    authenticateUser: authenticateUser,
     signout: signout,
   };
 };

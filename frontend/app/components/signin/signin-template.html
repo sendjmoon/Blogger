@@ -1,7 +1,7 @@
 <h1>Sign In</h1>
 
 <form name="signin" data-ng-submit="$ctrl.signin($ctrl.user)">
-  <input type="text" required placeholder="username" data-ng-model="$ctrl.user.username">
+  <input type="text" required placeholder="username" data-ng-model="$ctrl.user.emailOrUsername">
   <input type="password" required placeholder="password" data-ng-model="$ctrl.user.password">
   <button type="submit">Sign In</button>
 </form>

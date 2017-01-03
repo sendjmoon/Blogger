@@ -2,9 +2,11 @@ var express = require('express');
 var router = express.Router();
 const userService = require('../services').userService;
 
+const checkSessionExists = require('../lib/check_session_exists');
+
 /* GET users listing. */
-router.get('/', function(req, res, next) {
-  return req.sessionID ? res.redirect('/#!/signin') : res.redirect('/#!/signup');
+router.get('/', checkSessionExists, function(req, res, next) {
+  res.send('get request /users route');
 });
 
 router.post('/', function(req, res) {
@@ -24,14 +26,14 @@ router.post('/', function(req, res) {
 });
 
 router.post('/signin', function(req, res) {
-  userService.signin(req.body)
+  userService.authenticateUser(req.body.emailOrUsername, req.body.password)
     .then((user) => {
       delete user.password;
       req.session.user = user;
       res.json(user);
     })
     .catch((err) => {
-      res.status(500).json({
+      res.status(400).json({
         error: 'bad signin attempt'
       });
     });

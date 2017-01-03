@@ -22,9 +22,14 @@ module.exports = function() {
     });
   };
 
-  const signin = function(userData) {
+  const getByEmailOrUsername = function(emailOrUsername) {
     return new Promise((resolve, reject) => {
-      User.findOne({username: userData.username})
+      User.findOne({
+        $or: [
+          { username: emailOrUsername },
+          { email: emailOrUsername }
+        ]
+      })
         .select('-__v')
         .exec()
         .then((user) => {
@@ -36,6 +41,6 @@ module.exports = function() {
 
   return {
     create: create,
-    signin: signin,
+    getByEmailOrUsername: getByEmailOrUsername,
   };
 };
