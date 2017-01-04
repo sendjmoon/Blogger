@@ -6,7 +6,7 @@ module.exports = function(app) {
     this.signup = function(userData) {
       $http.post(this.baseUrl + '/users', userData)
         .then((res) => {
-          $location.path('/home');
+          $location.path('/posts');
         })
         .catch((err) => {
           alert('error creating user');
@@ -16,7 +16,7 @@ module.exports = function(app) {
     this.authenticateUser = function(userData) {
       $http.post(this.baseUrl + '/users/signin', userData)
         .then((res) => {
-          res.data === true ? $location.path('/home') : alert('error signing in');
+          res.data === true ? $location.path('/posts') : alert('error signing in');
         })
         .catch((err) => {
           alert('error signing in');

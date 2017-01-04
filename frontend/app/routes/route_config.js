@@ -2,13 +2,9 @@
 
 module.exports = function($routeProvider) {
   $routeProvider
-    .when('/blogposts', {
+    .when('/posts', {
       template: require('../html/blog-posts.html'),
       controller: 'BlogPostsController'
-    })
-    .when('/home', {
-      template: require('../html/home.html'),
-      controller: 'HomeController',
     })
     .when('/signup', {
       template: require('../html/signup.html'),
@@ -20,6 +16,6 @@ module.exports = function($routeProvider) {
       controller: 'AuthController',
     })
     .otherwise({
-      redirectTo: '/',
+      redirectTo: '/signin',
     });
 };

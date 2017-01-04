@@ -2,6 +2,5 @@
 
 module.exports = function(app) {
   require('./auth_controller')(app);
-  require('./home_controller')(app);
   require('./blog_posts_controller')(app);
 };
