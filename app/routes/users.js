@@ -27,8 +27,10 @@ router.post('/', function(req, res) {
 
 router.post('/signin', function(req, res) {
   userService.authenticateUser(req.body.emailOrUsername, req.body.password)
-    .then((isMatching) => {
-      res.json(isMatching);
+    .then((user) => {
+      delete user.password;
+      req.session.user = user;
+      res.json(true);
     })
     .catch((err) => {
       res.status(400).json({
