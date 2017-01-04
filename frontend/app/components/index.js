@@ -5,4 +5,5 @@ module.exports = function(app) {
   require('./signup')(app);
   require('./signout')(app);
   require('./home')(app);
+  require('./blogPosts')(app);
 };

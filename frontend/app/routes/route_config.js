@@ -2,6 +2,10 @@
 
 module.exports = function($routeProvider) {
   $routeProvider
+    .when('/blogposts', {
+      template: require('../html/blog-posts.html'),
+      controller: 'BlogPostsController'
+    })
     .when('/home', {
       template: require('../html/home.html'),
       controller: 'HomeController',
