@@ -3,6 +3,15 @@ const router = express.Router();
 
 const blogPostService = require('../services').blogPostService;
 
+router.get('/all', function(req, res) {
+  blogPostService.getAllPosts()
+    .then((allPosts) => {
+      allPosts ? res.json(allPosts) : res.status(404).json({
+        error: 'No posts found'
+      });
+    });
+});
+
 router.get('/:publicId', function(req, res) {
   blogPostService.getByPublicId(req.params.publicId)
     .then((post) => {

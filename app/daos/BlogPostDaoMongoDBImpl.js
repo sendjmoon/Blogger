@@ -21,7 +21,17 @@ module.exports = function() {
         })
         .catch(reject);
     });
-  }
+  };
+
+  const getAllPosts = function() {
+    return new Promise((resolve, reject) => {
+      BlogPost.find({})
+        .then((allPosts) => {
+          resolve(allPosts);
+        })
+        .catch(reject);
+    });
+  };
 
   const getById = function(id) {
     return new Promise((resolve, reject) => {
@@ -33,8 +43,8 @@ module.exports = function() {
           resolve(post ? post.toObject() : null);
         })
         .catch(reject);
-    })
-  }
+    });
+  };
 
   const getByPublicId = function(publicId) {
     return new Promise((resolve, reject) => {
@@ -47,7 +57,7 @@ module.exports = function() {
         })
         .catch(reject);
     });
-  }
+  };
 
   const getByAuthorId = function(authorId) {
     return new Promise((resolve, reject) => {
@@ -64,12 +74,13 @@ module.exports = function() {
         })
         .catch(reject);
     });
-  }
+  };
 
   return {
     create: create,
+    getAllPosts: getAllPosts,
     getById: getById,
     getByPublicId: getByPublicId,
     getByAuthorId: getByAuthorId,
   };
-}
+};

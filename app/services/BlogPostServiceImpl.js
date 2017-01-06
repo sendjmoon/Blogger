@@ -18,6 +18,10 @@ module.exports = function(blogPostDao) {
     return _blogPostDao.create(post);
   };
 
+  const getAllPosts = function() {
+    return _blogPostDao.getAllPosts();
+  };
+
   const getById = function(id) {
     return _blogPostDao.getById(id);
   };
@@ -33,6 +37,7 @@ module.exports = function(blogPostDao) {
 
   return {
     create: create,
+    getAllPosts: getAllPosts,
     getById: getById,
     getByPublicId: getByPublicId,
     getByAuthorId: getByAuthorId,
