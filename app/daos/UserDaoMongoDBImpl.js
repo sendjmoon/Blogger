@@ -22,7 +22,25 @@ module.exports = function() {
     });
   };
 
+  const getByEmailOrUsername = function(emailOrUsername) {
+    return new Promise((resolve, reject) => {
+      User.findOne({
+        $or: [
+          { username: emailOrUsername },
+          { email: emailOrUsername }
+        ]
+      })
+        .select('-__v')
+        .exec()
+        .then((user) => {
+          resolve(user.toObject());
+        })
+        .catch(reject);
+    });
+  };
+
   return {
     create: create,
+    getByEmailOrUsername: getByEmailOrUsername,
   };
 };
