@@ -33,7 +33,7 @@ module.exports = function(userDao) {
     return new Promise((resolve, reject) => {
       _userDao.getByEmailOrUsername(emailOrUsername)
         .then((user) => {
-          return isMatchingPassword(password, user.password)
+          isMatchingPassword(password, user.password)
             .then((isMatching) => {
               isMatching ? resolve(user) : reject();
             })
