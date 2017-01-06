@@ -16,6 +16,15 @@ router.get('/:publicId', function(req, res) {
     });
 });
 
+router.get('/author/:authorId', function(req, res) {
+  blogPostService.getByAuthorId(req.params.authorId)
+    .then((postsObject) => {
+      postsObject ? res.json(postsObject) : res.status(404).json({
+        error: `No posts found by id ${req.params.authorId}`
+      });
+    });
+});
+
 router.post('/', function(req, res) {
   const postData = {};
   postData.authorId = req.session.user._id;

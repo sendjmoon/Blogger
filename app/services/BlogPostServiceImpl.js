@@ -16,19 +16,25 @@ module.exports = function(blogPostDao) {
     post.publicId = `${utils.generateHash(4)}-${title.toLowerCase().split(' ').join('-')}`;
 
     return _blogPostDao.create(post);
-  }
+  };
 
   const getById = function(id) {
     return _blogPostDao.getById(id);
-  }
+  };
 
   const getByPublicId = function(publicId) {
     return _blogPostDao.getByPublicId(publicId);
-  }
+  };
+
+  const getByAuthorId = function(authorId) {
+    console.log('authorid: ' + authorId);
+    return _blogPostDao.getByAuthorId(authorId);
+  };
 
   return {
     create: create,
     getById: getById,
     getByPublicId: getByPublicId,
+    getByAuthorId: getByAuthorId,
   };
-}
+};
