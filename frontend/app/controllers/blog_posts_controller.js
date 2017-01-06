@@ -13,5 +13,14 @@ module.exports = function(app) {
           alert('error creating post');
         });
     };
+
+    this.viewByAuthor = function(authorData) {
+      this.testData = {
+        username: 'james',
+        email: 'james@james.com',
+      };
+
+      $http.post(this.baseUrl + '/posts/author', this.testData)
+    }
   }]);
 };
