@@ -8,16 +8,7 @@
       <h3>author: {{post.author.username}}</h3>
       <p>{{post.content}}</p>
     </div>
-
-    <a href="" ng-click="$ctrl.editing = true" ng-hide="$ctrl.editing">Edit Post</a>
-    <p ng-show="$ctrl.editing">{{post}}</p>
-    <form name="editPost" ng-show="$ctrl.editing" ng-submit="$ctrl.update(post)">
-      <input type="text" required value="{{post.title}}" ng-model="post.title">
-      <br />
-      <textarea rows="10" cols="50" required ng-model="post.content">{{post.content}}</textarea>
-      <br />
-      <button type="submit" ng-click="$ctrl.editing = false">Submit Changes</button>
-    </form>
-
+    
+    <update-blog-post data-base-url="$ctrl.baseUrl" data-post="post"></update-blog-post>
   </li>
 </ul>

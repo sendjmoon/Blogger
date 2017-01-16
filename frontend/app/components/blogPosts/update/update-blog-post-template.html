@@ -1,0 +1,12 @@
+<a href="" ng-click="$ctrl.editing = true" ng-hide="$ctrl.editing">Edit Post</a>
+
+<div ng-show="$ctrl.editing">
+  <p>{{$ctrl.post}}</p>
+  <form name="editPost" ng-submit="$ctrl.update($ctrl.post)">
+    <input type="text" required value="{{$ctrl.post.title}}" ng-model="$ctrl.post.title">
+    <br />
+    <textarea rows="10" cols="50" required ng-model="$ctrl.post.content">{{$ctrl.post.content}}</textarea>
+    <br />
+    <button type="submit" ng-click="$ctrl.editing = false">Submit Changes</button>
+  </form>
+</div>
