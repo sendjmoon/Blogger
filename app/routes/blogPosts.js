@@ -6,9 +6,13 @@ const blogPostService = require('../services').blogPostService;
 router.get('/all', function(req, res) {
   blogPostService.getAllPosts()
     .then((allPosts) => {
-      allPosts ? res.json(allPosts) : res.status(404).json({
-        error: 'No posts found'
-      });
+      if (!allPosts || allPosts.length < 1) {
+        res.status(404).json({
+          error: 'No posts found'
+        });
+      } else {
+        res.json(allPosts);
+      }
     });
 });
 
@@ -28,9 +32,13 @@ router.get('/:publicId', function(req, res) {
 router.get('/author/:authorId', function(req, res) {
   blogPostService.getByAuthorId(req.params.authorId)
     .then((postsObject) => {
-      postsObject ? res.json(postsObject) : res.status(404).json({
-        error: `No posts found by id ${req.params.authorId}`
-      });
+      if (!postsObject) {
+        res.status(404).json({
+          error: `No posts found by id ${req.params.authorId}`
+        });
+      } else {
+        res.json(postsObject);
+      }
     });
 });
 

@@ -26,9 +26,9 @@ module.exports = function() {
   const getAllPosts = function() {
     return new Promise((resolve, reject) => {
       BlogPost.find({})
-        .then((allPosts) => {
-          resolve(allPosts);
-        })
+      .select('-__v')
+      .populate('author', '-_id username email')
+        .then(resolve)
         .catch(reject);
     });
   };
@@ -61,6 +61,8 @@ module.exports = function() {
 
   const getByAuthorId = function(authorId) {
     return new Promise((resolve, reject) => {
+      const AuthorObjectId = require('mongoose').Types.ObjectId;
+      authorId = new AuthorObjectId(authorId);
       BlogPost.find({ author: authorId })
         .select('-_id -__v')
         .populate('author', '-_id username email')

@@ -31,7 +31,6 @@ module.exports = function(blogPostDao) {
   };
 
   const getByAuthorId = function(authorId) {
-    console.log('authorid: ' + authorId);
     return _blogPostDao.getByAuthorId(authorId);
   };
 
