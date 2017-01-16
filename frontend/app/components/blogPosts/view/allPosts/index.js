@@ -1,9 +1,9 @@
 'use strict';
 
 module.exports = function(app) {
-  app.component('viewByAuthor', {
+  app.component('viewAllPosts', {
     controller: 'BlogPostsController',
-    template: require('./view-by-author-template.html'),
+    template: require('./view-all-posts-template.html'),
     bindings: {
       baseUrl: '<',
     },

@@ -1,0 +1,9 @@
+<h1>All Posts Template</h1>
+
+<ul data-ng-init="$ctrl.getAllPosts()">
+  <li data-ng-repeat="post in $ctrl.allPosts">
+    <h3>{{post.title}}</h3>
+    <p>author: {{post.author.username}}</p>
+    <p>{{post.content}}</p>
+  </li>
+</ul>

@@ -1,1 +1,8 @@
 <h1>View by Author Template</h1>
+
+<ul data-ng-init="$ctrl.viewByAuthor()">
+  <li data-ng-repeat="post in $ctrl.authorPosts">
+    <h3>{{post.title}}</h3>
+    <p>Author: {{post.author.username}}</p>
+    <p>{{post.content}}</p>
+</ul>

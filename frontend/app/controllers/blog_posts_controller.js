@@ -14,13 +14,24 @@ module.exports = function(app) {
         });
     };
 
-    this.viewByAuthor = function(authorData) {
-      this.testData = {
-        username: 'james',
-        email: 'james@james.com',
-      };
+    this.getAllPosts = function() {
+      $http.get(this.baseUrl + '/posts/all')
+        .then((allPosts) => {
+          this.allPosts = allPosts.data;
+        })
+        .catch((err) => {
+          alert('error getting posts');
+        });
+    };
 
-      $http.post(this.baseUrl + '/posts/author', this.testData)
-    }
+    this.viewByAuthor = function() {
+      $http.get(this.baseUrl + '/posts/author/586b0b7056b36bb6d2778ff8')
+        .then((authorPosts) => {
+          this.authorPosts = authorPosts.data;
+        })
+        .catch((err) => {
+          alert('error finding author');
+        });
+    };
   }]);
 };
