@@ -78,11 +78,27 @@ module.exports = function() {
     });
   };
 
+  const updateByPublicId = function(publicId, title, content) {
+    return new Promise((resolve, reject) => {
+      BlogPost.findOneAndUpdate(
+          { publicId: publicId },
+          { title: title },
+          { content: content }
+        )
+        .then((post) => {
+          post.save((err) => {
+            err ? reject(err) : resolve(post);
+          });
+        });
+    });
+  };
+
   return {
     create: create,
     getAllPosts: getAllPosts,
     getById: getById,
     getByPublicId: getByPublicId,
     getByAuthorId: getByAuthorId,
+    updateByPublicId: updateByPublicId,
   };
 };

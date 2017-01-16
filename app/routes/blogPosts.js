@@ -64,4 +64,25 @@ router.post('/', function(req, res) {
     });
 });
 
+router.post('/:publicId', function(req, res) {
+  const updateData = {};
+  updateData.publicId = req.body.publicId;
+  updateData.title = req.body.title;
+  updateData.content = req.body.content;
+
+  blogPostService.updateByPublicId(
+      updateData.publicId,
+      updateData.title,
+      updateData.content
+    )
+    .then((post) => {
+      res.json(post);
+    })
+    .catch((err) => {
+      res.status(500).json({
+        error: 'error updating post'
+      });
+    });
+});
+
 module.exports = router;

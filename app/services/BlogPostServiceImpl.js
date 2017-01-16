@@ -34,11 +34,16 @@ module.exports = function(blogPostDao) {
     return _blogPostDao.getByAuthorId(authorId);
   };
 
+  const updateByPublicId = function(publicId, title, content) {
+    return _blogPostDao.updateByPublicId(publicId, title, content);
+  };
+
   return {
     create: create,
     getAllPosts: getAllPosts,
     getById: getById,
     getByPublicId: getByPublicId,
     getByAuthorId: getByAuthorId,
+    updateByPublicId: updateByPublicId,
   };
 };
