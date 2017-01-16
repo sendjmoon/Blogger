@@ -4,6 +4,8 @@ module.exports = function(app) {
   app.controller('BlogPostsController', ['$http', function($http) {
     console.log('blog posts controller');
 
+    this.editing = false;
+
     this.create = function(postData) {
       $http.post(this.baseUrl + '/posts', postData)
         .then((res) => {
@@ -21,6 +23,16 @@ module.exports = function(app) {
         })
         .catch((err) => {
           alert('error getting posts');
+        });
+    };
+
+    this.update = function(postData) {
+      $http.post(this.baseUrl + '/posts/' + postData.publicId, postData)
+        .then((post) => {
+          console.log('update successful');
+        })
+        .catch((err) => {
+          alert('error updating post');
         });
     };
 
