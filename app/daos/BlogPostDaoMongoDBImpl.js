@@ -86,6 +86,8 @@ module.exports = function() {
           { content: content }
         )
         .then((post) => {
+          post.title = title;
+          post.content = content;
           post.save((err) => {
             err ? reject(err) : resolve(post);
           });
