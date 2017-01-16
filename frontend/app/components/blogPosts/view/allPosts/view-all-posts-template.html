@@ -1,14 +1,9 @@
 <h1>All Posts Template</h1>
 
-<ul data-ng-init="$ctrl.getAllPosts()">
-  <li data-ng-repeat="post in $ctrl.allPosts">
+<ul ng-init="$ctrl.getAllPosts()">
 
-    <div ng-hide="$ctrl.editing">
-      <h2>{{post.title}}</h2>
-      <h3>author: {{post.author.username}}</h3>
-      <p>{{post.content}}</p>
-    </div>
-    
-    <update-blog-post data-base-url="$ctrl.baseUrl" data-post="post"></update-blog-post>
+  <li ng-repeat="post in $ctrl.allPosts">
+    <blog-post data-base-url = "$ctrl.baseUrl" data-post="post"></blog-post>
   </li>
+
 </ul>

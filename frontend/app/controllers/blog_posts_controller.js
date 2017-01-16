@@ -2,8 +2,7 @@
 
 module.exports = function(app) {
   app.controller('BlogPostsController', ['$http', function($http) {
-    console.log('blog posts controller');
-
+    
     this.editing = false;
 
     this.create = function(postData) {

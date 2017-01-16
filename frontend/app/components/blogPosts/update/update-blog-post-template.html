@@ -1,7 +1,6 @@
 <a href="" ng-click="$ctrl.editing = true" ng-hide="$ctrl.editing">Edit Post</a>
 
 <div ng-show="$ctrl.editing">
-  <p>{{$ctrl.post}}</p>
   <form name="editPost" ng-submit="$ctrl.update($ctrl.post)">
     <input type="text" required value="{{$ctrl.post.title}}" ng-model="$ctrl.post.title">
     <br />
