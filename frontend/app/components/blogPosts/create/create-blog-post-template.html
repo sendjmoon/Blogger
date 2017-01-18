@@ -1,0 +1,10 @@
+<h3>CREATE BLOG POST</h3>
+
+<form name="createPost" ng-submit="$ctrl.create($ctrl.postData)">
+  <input type="text" required placeholder="Title" ng-model="$ctrl.postData.title">
+  <br />
+  <textarea rows="10" cols="50" required placeholder="Blog Here" ng-model="$ctrl.postData.content">
+  </textarea>
+  <br />
+  <button type="submit">Create</button>
+</form>

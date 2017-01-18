@@ -1,0 +1,7 @@
+<h1>All Posts Template</h1>
+
+<ul ng-init="$ctrl.getAllPosts()">
+  <li ng-repeat="post in $ctrl.allPosts">
+    <blog-post data-base-url = "$ctrl.baseUrl" data-post="post"></blog-post>
+  </li>
+</ul>

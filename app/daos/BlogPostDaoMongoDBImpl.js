@@ -21,7 +21,17 @@ module.exports = function() {
         })
         .catch(reject);
     });
-  }
+  };
+
+  const getAllPosts = function() {
+    return new Promise((resolve, reject) => {
+      BlogPost.find({})
+      .select('-__v')
+      .populate('author', '-_id username email')
+        .then(resolve)
+        .catch(reject);
+    });
+  };
 
   const getById = function(id) {
     return new Promise((resolve, reject) => {
@@ -33,8 +43,8 @@ module.exports = function() {
           resolve(post ? post.toObject() : null);
         })
         .catch(reject);
-    })
-  }
+    });
+  };
 
   const getByPublicId = function(publicId) {
     return new Promise((resolve, reject) => {
@@ -47,10 +57,12 @@ module.exports = function() {
         })
         .catch(reject);
     });
-  }
+  };
 
   const getByAuthorId = function(authorId) {
     return new Promise((resolve, reject) => {
+      const AuthorObjectId = require('mongoose').Types.ObjectId;
+      authorId = new AuthorObjectId(authorId);
       BlogPost.find({ author: authorId })
         .select('-_id -__v')
         .populate('author', '-_id username email')
@@ -64,12 +76,31 @@ module.exports = function() {
         })
         .catch(reject);
     });
-  }
+  };
+
+  const updateByPublicId = function(publicId, title, content) {
+    return new Promise((resolve, reject) => {
+      BlogPost.findOneAndUpdate(
+          { publicId: publicId },
+          { title: title },
+          { content: content }
+        )
+        .then((post) => {
+          post.title = title;
+          post.content = content;
+          post.save((err) => {
+            err ? reject(err) : resolve(post);
+          });
+        });
+    });
+  };
 
   return {
     create: create,
+    getAllPosts: getAllPosts,
     getById: getById,
     getByPublicId: getByPublicId,
     getByAuthorId: getByAuthorId,
+    updateByPublicId: updateByPublicId,
   };
-}
+};
